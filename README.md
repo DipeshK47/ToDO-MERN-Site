@@ -96,23 +96,4 @@ Todo List
 	•	PUT /api/v1/list/:id - Update a task.
 	•	DELETE /api/v1/list/:id - Delete a task.
 
-Folder Structure
-
-todo-mern-site/
-├── backend/                # Node.js & Express backend
-│   ├── conn/               # MongoDB connection
-│   ├── models/             # Mongoose models
-│   ├── routes/             # API routes (auth, list)
-│   ├── app.js              # Main server file
-│   └── package.json        # Backend dependencies
-│
-├── frontend/               # React frontend
-│   ├── src/                # React components and pages
-│   ├── public/             # Static files
-│   └── package.json        # Frontend dependencies
-│
-├── .gitignore              # Git ignore file
-├── README.md               # Project documentation
-└── package.json            # Root dependencies (if any)
-
 Thanks.
