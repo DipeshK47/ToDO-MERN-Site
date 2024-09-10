@@ -1,0 +1,64 @@
+/* Full height and centering the home section */
+.home {
+    width: 100%;
+    height: 100vh;
+    background-color: #f7f9fc; /* Light background for contrast */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Styling for the main heading with a darker, more visible gradient */
+  .home h1 {
+    font-size: 110px;
+    font-weight: bold;
+    background: linear-gradient(90deg, #4a90e2 0%, #6a8fd6 35%, #8f88c9 65%, #b7c37f 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+  
+  /* Subheading styling */
+  .home p {
+    font-size: 27px;
+    color: #555;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  /* Button design with shadow */
+  .home-btn {
+    background-color: #e35305; /* Keeping your original color */
+    border-radius: 3px;
+    color: white;
+    padding: 12px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  /* Hover effect for the button with deeper shadow */
+  .home-btn:hover {
+    background-color: #c14605; /* Slightly darker on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); /* Stronger shadow on hover */
+  }
+  
+  /* Responsive adjustments for smaller screens */
+  @media (max-width: 768px) {
+    .home h1 {
+      font-size: 50px;
+    }
+    
+    .home p {
+      font-size: 16px;
+    }
+  
+    .home-btn {
+      font-size: 16px;
+      padding: 10px 25px;
+    }
+  }

@@ -1,0 +1,49 @@
+/* Footer container styling */
+.footer {
+    background-color: #333; /* Dark background for a modern look */
+    color: white;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  /* Footer content container */
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1140px; /* Limiting width for better structure */
+    margin: 0 auto;
+  }
+  
+  /* Footer title styling */
+  .footer-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #f97e37; /* Complementary color for better contrast */
+    transition: color 0.3s ease;
+  }
+  
+  /* Footer text styling */
+  .footer-text {
+    font-size: 14px;
+    color: #ddd; /* Slightly lighter text for readability */
+  }
+  
+  /* Footer title hover effect */
+  .footer-title:hover {
+    color: #ffad73; /* Lighter color on hover */
+  }
+  
+  /* Adjustments for smaller screens */
+  @media (max-width: 768px) {
+    .footer-title {
+      font-size: 20px;
+    }
+  
+    .footer-text {
+      font-size: 12px;
+    }
+  }
