@@ -1,12 +1,19 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/user");
-const bcrypt = require("bcryptjs")
+const bcrypt = require("bcryptjs");
+
 // Register User
 router.post("/register", async (req, res) => {
     try {
+        console.log("Received data:", req.body); // Log the request data
         const { email, username, password } = req.body;
-        const hashedPassword = bcrypt.hashSync(password)
+        
+        if (!email || !username || !password) {
+            return res.status(400).json({ message: "Missing required fields" });
+        }
+
+        const hashedPassword = bcrypt.hashSync(password, 10); // Ensure you add a salt round
 
         // Check if user already exists
         const existingUser = await User.findOne({ email });
@@ -17,31 +24,34 @@ router.post("/register", async (req, res) => {
         // Create new user
         const newUser = new User({ email, username, password: hashedPassword });
         await newUser.save();
-        
-        res.status(200).json({ user: newUser });
+
+        res.status(200).json({ message: "Success registered" });
     } catch (error) {
         res.status(500).json({ message: "Server Error", error: error.message });
     }
 });
 
 // Login
-
-router.post('/login', async (req, res) => {
+router.post('/signin', async (req, res) => {
     try {
-        const user = await User.findOne({email: req.body.email})
-        if (!user){
-            return res.status(400).json({message: "user doesnt exists"})
+        console.log("Sign-in request received:", req.body); // Log request body
+        const user = await User.findOne({ email: req.body.email });
+        if (!user) {
+            return res.status(400).json({ message: "User doesn't exist" });
         }
 
-        const isPasswordCorrect = bcrypt.compareSync(req.body.password, user.password)
-        if (!isPasswordCorrect){
-            res.status(400).json({message: "Wrong password"})
+        const isPasswordCorrect = bcrypt.compareSync(req.body.password, user.password);
+        if (!isPasswordCorrect) {
+            return res.status(400).json({ message: "Wrong password" });
         }
-        const {password, ...others} = user._doc;
-         res.status(400).json({ others })
+
+        // Remove password from the response
+        const { password, ...otherDetails } = user._doc;
+        return res.status(200).json({ user: otherDetails });
     } catch (error) {
-         res.status(400).json({message: "login failed"})
+        console.error("Login failed:", error); // Log the error
+        return res.status(500).json({ message: "Login failed", error: error.message });
     }
-})
+});
 
 module.exports = router;

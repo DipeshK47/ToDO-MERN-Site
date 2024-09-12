@@ -2,8 +2,17 @@ import React from 'react';
 import './Navbar.css';
 import { MdOutlineCollectionsBookmark } from "react-icons/md";
 import { Link } from 'react-router-dom'; // Assuming you are using react-router for navigation
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { authActions } from '../../store';
+const Navbar = () => {
+  // Correctly access the isLoggedIn state from auth slice
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const dispatch = useDispatch()
+  const logout = () => {
+    dispatch(authActions.logout())
+  }
 
-const Navbar=  () => {
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary custom-navbar">
       <div className="container">
@@ -39,27 +48,36 @@ const Navbar=  () => {
               <Link className="nav-link btn-nav" to="/todo">
                 ToDo
               </Link>
-            </li>
-            <li className="nav-item mx-2">
-              <Link className="nav-link btn-nav" to="/signup">
-                SignUp
-              </Link>
-            </li>
-            <li className="nav-item mx-2">
-              <Link className="nav-link btn-nav" to="/signin">
-                SignIn
-              </Link>
-            </li>
-            <li className="nav-item mx-2">
-              <Link className="nav-link btn-nav" to="/logout">
-                Logout
-              </Link>
-            </li>
+            </li> 
+            {!isLoggedIn && (
+              <>
+                <li className="nav-item mx-2">
+                  <Link className="nav-link btn-nav" to="/signup">
+                    SignUp
+                  </Link>
+                </li>
+                <li className="nav-item mx-2">
+                  <Link className="nav-link btn-nav" to="/signin">
+                    SignIn
+                  </Link>
+                </li>
+              </>
+            )}
+            {isLoggedIn && (
+              <>
+                <li className="nav-item mx-2" onClick={logout}>
+                  <Link className="nav-link btn-nav" to="/logout">
+                    Logout
+                  </Link>
+                  
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>
     </nav>
   );
-}
+};
 
 export default Navbar;
